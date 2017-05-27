@@ -1,0 +1,64 @@
+<% include ../partials/header %>
+<div class="container">
+<div clas="row">
+	<div class="col-md-3">
+		<p class="lead">YelpCamp</p>
+		<div class="list-group">
+			<li class="list-group-item active">Info 1</li>
+			<li class="list-group-item">Info 2</li>
+			<li class="list-group-item">Info 3</li>
+		</div>
+	</div>
+	<div class="col-md-9">
+		<div class="thumbnail">
+			<img class="responsive" src="<%=detail.image%>">
+			<div class="caption-full">
+				<h4 class="pull-right">$9.00/night</h4>
+				<h4><a href="#"><%=detail.name%></a></h4>
+			</div>
+			<div>
+				<%=detail.details%>
+			</div>
+			<p><em>Submitted By <%=detail.author.username%></em></p>
+			<% if(currentUser){ %>
+				<%if(detail.author.id.equals(currentUser.id)){%>
+				<div>
+					<a href="/campgrounds/<%=detail.id%>/edit" class="btn btn-warning">Edit</a>
+					<form action="/campgrounds/<%=detail._id%>?_method=DELETE" class="inlineform" method="POST">
+						<button class="btn btn-danger">Delete</button>
+					</form>
+				</div>
+				<%}%>
+			<%}%>
+		</div>
+		<div class="well">
+			<div class="text-right">
+				<a class="btn btn-success" href="/campgrounds/<%=detail._id%>/comments/new">Add New Comment</a>
+			</div>
+			<hr>
+			<% detail.comments.forEach(function(comment){%>
+			<div class="row">
+				<div class="col-md-12">
+					<strong><%=comment.author.username%></strong>
+					<span class="pull-right">10 days ago</span>
+					<p>
+						<%=comment.text%>
+					</p>
+					<div>
+					<% if(currentUser){ %>
+						<% if(comment.author.id.equals(currentUser.id)){%>
+							<a href="/campgrounds/<%=detail._id%>/comments/<%=comment._id%>/edit" class="btn btn-info btn-xs">Edit</a>
+							<form action="/campgrounds/<%=detail._id%>/comments/<%=comment._id%>?_method=DELETE" class="inlineform" method="POST">
+								<input type="submit" class="btn btn-danger btn-xs" name="button" value="Delete">
+							</form>
+						<%}%>
+					<%}%>
+					</div>
+				</div>
+			</div>
+			<%})%>
+		</div>
+	</div>
+</div>
+</div>
+<% include ../partials/footer %>
