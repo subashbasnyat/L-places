@@ -1,15 +1,26 @@
 <% include ./partials/header.ejs %>
+
+
 <div class="container">
 	<div class="jumbotron">
-	<h1>Welcome to Locate Places</h1>
-	<form action="/login" method="POST">
-	<input type="name" name="username" placeholder="username">
-	<input type="password" name="password" placeholder="password">
-	<button>Log In</button>
-</form>
+		<h1>Welcome to Locate Places</h1>
+		<h3> Login with your username and password to add your places.</h3>
+
+
+		
 	</div>
+<div class="container">
+	<form action="/login" class="col-md-5 col-md-offset-3" method="POST">
+			<div class="form-group">
+				<label for="user"> Username</label>
+				<input type="name" class="form-control" id="user" name="username" placeholder="username">
+			</div>
+			<div class="form-group">
+				<label for="password"> Password</label>
+				<input type="password" class="form-control id="password" name="password" placeholder="password">
+			</div>
+			<button>Log In</button>
+		</form>
 </div>
-
-
 
 <% include ./partials/footer.ejs %>
