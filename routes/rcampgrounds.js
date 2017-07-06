@@ -3,13 +3,19 @@ var router = express.Router();
 var Camp = require('../models/mcampground');
 
 //Index
+// router.get("/",function(req,res){
+// 	Camp.find({},function(err,camps){
+// 		if(!err){
+// 			res.render("campgrounds/campgrounds",{camp:camps});
+// 		}
+// 	});
+// });
 router.get("/",function(req,res){
-	Camp.find({},function(err,camps){
+	Camp.find({}).sort({views:'descending'}).exec(function(err,docs){
 		if(!err){
-			res.render("campgrounds/campgrounds",{camp:camps});
+			res.render("campgrounds/campgrounds",{camp:docs});
 		}
-	});
-
+	})
 });
 
 //new
@@ -30,7 +36,8 @@ router.post("/",isLoggedIn,function(req,res){
 		name:name,
 		image:image,
 		details:details,
-		author:author
+		author:author,
+		views:0
 	},function(err,camp){
 		if(!err){
 			res.redirect("/campgrounds");
@@ -41,8 +48,14 @@ router.post("/",isLoggedIn,function(req,res){
 //show details
 router.get("/:id",function(req,res){
 	Camp.findById(req.params.id).populate('comments').exec(function(err,camps){
+		camps.views = camps.views+1;
+		camps.save(function(err,dcamp){
+			if(!err){
+				res.render("campgrounds/details",{detail:dcamp});
+			}
+		})
 		if(!err){
-			res.render("campgrounds/details",{detail:camps});
+			console.log("GOOD EVERYTHING IS GOOD");
 		}
 	});
 });

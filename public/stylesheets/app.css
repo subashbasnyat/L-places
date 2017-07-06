@@ -1,8 +1,12 @@
 body {
-	background:url(http://www.parakhi.com/content/wp-content/uploads/2012/09/Baudh.jpg);
+	background:url('../raw/jaynepal.jpg');
 	background-size: cover;
-	background-position: center;
-	color: black;
+	background-position: left top;
+	color: white;
+}
+
+.container{
+	font-family: Lato;
 }
 
 html {
@@ -11,9 +15,9 @@ html {
 
 #content {
 	text-align: center;
-	padding-top: 23%;
-	text-shadow: 0px 4px 3px rgba(0,0,0,0.4),
-				 0px 8px 13px rgba(0,0,0,0.1),
+	padding-top: 18%;
+	text-shadow: 0px 4px 3px rgba(0,0,0,0.5),
+				 0px 8px 13px rgba(0,0,0,0.3),
 				 0px 18px 23px rgba(0,0,0,0.1);
 }
 
