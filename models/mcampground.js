@@ -4,6 +4,11 @@ var campSchema = new mongoose.Schema({
 	image: String,
 	details: String,
 	views: Number,
+	latitude: Number,
+	longitude: Number,
+	img:  { 
+		data: Buffer, contentType: String 
+	},
 	author: {
 		id:{
 			type:mongoose.Schema.Types.ObjectId,

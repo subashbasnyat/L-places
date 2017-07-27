@@ -1,7 +1,20 @@
 var express = require('express');
 var router = express.Router();
 var Camp = require('../models/mcampground');
+var fs = require('fs');
+var multer = require('multer');
+var path = require('path');
 
+var storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, './public/uploads')
+  },
+  filename: function (req, file, cb) {
+      cb(null, file.originalname);        
+  }
+})
+ 
+var upload = multer({ storage: storage })
 //Index
 // router.get("/",function(req,res){
 // 	Camp.find({},function(err,camps){
@@ -10,6 +23,8 @@ var Camp = require('../models/mcampground');
 // 		}
 // 	});
 // });
+
+
 router.get("/",function(req,res){
 	Camp.find({}).sort({views:'descending'}).exec(function(err,docs){
 		if(!err){
@@ -23,20 +38,35 @@ router.get("/new",isLoggedIn,function(req,res){
 	res.render("campgrounds/newcamp");
 });
 
+
+// var newItem = new Item();
+//  newItem.img.data = fs.readFileSync(req.files.userPhoto.path)
+//  newItem.img.contentType = ‘image/png’;
+//  newItem.save();
+
+
 //create
-router.post("/",isLoggedIn,function(req,res){
+router.post("/",upload.single('file'),isLoggedIn,function(req,res){
 	var name = req.body.placename;
-	var image = req.body.imageurl;
 	var details = req.body.details;
+	var img = {
+		data : req.file.originalname,
+		contentType : 'image/png'
+	}
 	var author = {
 		id: req.user._id,
 		username:req.user.username
 	}
+	var latitude = req.body.latitude;
+	var longitude = req.body.longitude;
+	console.log(req.body);
 	Camp.create({
 		name:name,
-		image:image,
 		details:details,
+		img:img,
 		author:author,
+		latitude:latitude,
+		longitude:longitude,
 		views:0
 	},function(err,camp){
 		if(!err){
