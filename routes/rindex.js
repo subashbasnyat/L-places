@@ -34,14 +34,11 @@ router.post('/register',function(req,res){
 	});	
 });
 
-<<<<<<< HEAD
 router.get('/user', function(req,res){
 	Camp.find({'author.username':req.user.username}).exec(function(err,users){
 		res.render('profile',{users:users});
 	});
 });
-=======
->>>>>>> 5a26999307053e04a6d96ab47b848fd91a7301c2
 
 //login form
 router.get('/login',function(req,res){
