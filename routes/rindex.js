@@ -8,6 +8,10 @@ router.get('/',function(req,res){
 	res.render("landing")
 });
 
+router.get('/about',function(req,res){
+	res.render("about");
+});
+
 //Show Register Form	
 router.get('/register',function(req,res){
 	res.render('register');
@@ -29,19 +33,16 @@ router.post('/register',function(req,res){
 	});	
 });
 
+
 //login form
 router.get('/login',function(req,res){
 	res.render("login");
 });
 
-router.get('/loginfailed',function(req,res){
-	req.flash("error","SORRY MOFO");
-	res.redirect("/login");
-})
 //handles login logic
 router.post('/login',passport.authenticate('local',{
 	successRedirect:'/campgrounds',
-	failureRedirect:'/loginfailed'
+	failureRedirect:'/login'
 }),function(req,res){
 });
 
