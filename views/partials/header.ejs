@@ -31,7 +31,7 @@
 				<li><a href="/login"><i class="fa fa-user" aria-hidden="true"></i>Login </a></li>
 				<li><a href="/register"><i class="fa fa-user-plus" aria-hidden="true"></i>Sign Up</a></li>
 			<% } else { %>
-				<li><a href="#">Signed in as <%=currentUser.username%></a></li>
+				<li><a href="/user">Signed in as <%=currentUser.username%></a></li>
 				<li><a href="/logout">Sign Out</a></li>
 			<% } %>
 			</ul>

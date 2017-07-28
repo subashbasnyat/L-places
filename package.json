@@ -5,7 +5,7 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start":"node app.js"
+    "start": "node app.js"
   },
   "author": "Subash Basnet",
   "license": "ISC",
@@ -15,7 +15,9 @@
     "ejs": "^2.5.5",
     "express": "^4.14.1",
     "express-session": "^1.15.0",
+    "fs": "0.0.1-security",
     "method-override": "^2.3.7",
+    "multer": "^1.3.0",
     "passport": "^0.3.2",
     "passport-local": "^1.0.0",
     "passport-local-mongoose": "^4.0.0"

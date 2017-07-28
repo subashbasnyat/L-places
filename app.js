@@ -6,6 +6,8 @@ var passport = require('passport');
 var LocalStrategy = require('passport-local');
 var methodOverride = require('method-override');
 var flash = require('connect-flash');
+var fs = require('fs');
+var multer = require('multer');
 mongoose.Promise = global.Promise;
 // mongoose.connect("mongodb://localhost/campdb");
 mongoose.connect("mongodb://subashbasnyat:subashbasnet0123@ds155841.mlab.com:55841/lplaces");

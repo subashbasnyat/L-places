@@ -3,19 +3,72 @@
 <div class='container'>
 	<h1 style="text-align: center;"> Add new Places</h1>
 	<div style="width:30%; margin:25px auto;">
-		<form action="/campgrounds" method="POST">
-		<div class="form-group">
-			<input class="form-control" type="text" name="placename" placeholder="Name of Place">
-		</div>
-		<div class="form-group">
-			<input class="form-control" type="text" name="imageurl" placeholder="url of image">
-		</div>
-		<div class="form-group">
-			<textarea rows="6" class="form-control" name="details"></textarea>
-		</div>
-		<div class = "form-group">
-			<button class="btn btn-lg btn-primary btn-block">Submit</button>
-		</div>
+		<form action="/campgrounds" method="POST" enctype="multipart/form-data">
+			<div class="form-group">
+				<input class="form-control" type="text" name="placename" placeholder="Name of Place">
+			</div>
+			<div class="form-group">
+				<input class="form-control" type=file name="file" placeholder="url of image">
+			</div>
+			<div class="form-group">
+				<textarea rows="6" class="form-control" name="details"></textarea>
+			</div>
+			<input type="hidden" name="latitude" id="latitude" value="">
+			<input type="hidden" name="longitude" id="longitude" value="">
+			<div class = "form-group">
+				<style>
+		       	#map {
+		        height: 400px;
+		        width: 100%;
+		       	}
+		    	</style>
+
+				<script async defer
+		    		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCrDFDqmbefeEWWQdD0l2kSPG8XD9yPOSk&callback=initMap">
+		    	</script>
+		    	<div id = "map"></div>
+				<script>
+					function initMap() {
+
+						var myLatlng = {
+					    	lat: 27.697354,
+					    	lng: 85.324457
+					  	};
+
+					  	var map = new google.maps.Map(document.getElementById('map'), {
+					    	zoom: 12,
+					    	center: myLatlng
+					  	});
+
+					  	map.addListener('mousemove', function(event) {
+					  		displayCoordinates(event.latLng);
+						});
+
+						function displayCoordinates(pnt) {
+						 	latt = pnt.lat();
+						 	//lat = lat.toFixed(4);
+						 	lngg = pnt.lng();
+						 	//lng = lng.toFixed(4);
+						 	console.log("Latitude: " + latt + "  Longitude: " + lngg);
+
+						 	map.addListener('click', function() {
+						    	var parker = new google.maps.Marker({
+							      	position: {lat:latt,lng:lngg},
+							      	map: map,
+							      	title: 'new place'
+						    	});
+						    var latitude = document.getElementById("latitude");
+						    	latitude.value = latt;
+						    var longitude = document.getElementById("longitude");
+						    	longitude.value = lngg;
+					  		});
+						}
+					}
+		    	</script>
+			</div>
+			<div class = "form-group">
+				<button class="btn btn-lg btn-primary btn-block">Submit</button>
+			</div>
 		</form>
 		<a href="/campgrounds">Go Back</a>
 	</div>

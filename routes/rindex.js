@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router({mergeParams:true});
 var passport = require('passport');
 var User = require('../models/muser');
+var Camp = require('../models/mcampground')
 
 //Root
 router.get('/',function(req,res){
@@ -33,6 +34,11 @@ router.post('/register',function(req,res){
 	});	
 });
 
+router.get('/user', function(req,res){
+	Camp.find({'author.username':req.user.username}).exec(function(err,users){
+		res.render('profile',{users:users});
+	});
+});
 
 //login form
 router.get('/login',function(req,res){

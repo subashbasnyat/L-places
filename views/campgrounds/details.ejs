@@ -11,9 +11,9 @@
 	</div>
 	<div class="col-md-9">
 		<div class="thumbnails">
-			<img class="responsive" src="<%=detail.image%>">
+			<img class="responsive" src="../uploads/<%=detail.img.data%>">
 			<div class="caption-full">
-				<h4 class="pull-right">$9.00/night</h4>
+				
 				<h4><a href="#"><%=detail.name%></a></h4>
 			</div>
 			<div>
@@ -60,5 +60,34 @@
 		</div>
 	</div>
 </div>
+	<style>
+       #map {
+        height: 400px;
+        width: 100%;
+       }
+    </style>
+	<div id="map"></div>
+    <script>
+		function initMap() {
+			var myLatlng = {
+		    	lat: <%= detail.latitude %>,
+		    	lng: <%= detail.longitude %>
+		  	};
+
+		  	var map = new google.maps.Map(document.getElementById('map'), {
+		    	zoom: 12,
+		    	center: myLatlng
+		  	});
+
+		  	var marker = new google.maps.Marker({
+		    	position: myLatlng,
+		    	map: map,
+		    	title: 'Click to zoom'
+		  	});
+		}
+    </script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCrDFDqmbefeEWWQdD0l2kSPG8XD9yPOSk&callback=initMap">
+    </script>
 </div>
 <% include ../partials/footer %>
