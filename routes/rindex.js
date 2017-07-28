@@ -53,7 +53,7 @@ router.get('/loginfailed',function(req,res){
 //handles login logic
 router.post('/login',passport.authenticate('local',{
 	successRedirect:'/campgrounds',
-	failureRedirect:'/loginfailed'
+	failureRedirect:'/loginfailed',
 	failureRedirect:'/login'
 }),function(req,res){
 });
