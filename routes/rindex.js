@@ -39,9 +39,15 @@ router.get('/login',function(req,res){
 	res.render("login");
 });
 
+router.get('/loginfailed',function(req,res){
+ req.flash("error","SORRY MOFO");
+ res.redirect("/login");
+})
+
 //handles login logic
 router.post('/login',passport.authenticate('local',{
 	successRedirect:'/campgrounds',
+	failureRedirect:'/loginfailed'
 	failureRedirect:'/login'
 }),function(req,res){
 });

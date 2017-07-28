@@ -5,6 +5,7 @@
 	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="/stylesheets/main.css">
 	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	<script src="https://use.fontawesome.com/1c5d8753dd.js"></script>
 </head>
 <body>
 
@@ -27,8 +28,8 @@
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 			<% if(!currentUser){ %>
-				<li><a href="/login">Login </a></li>
-				<li><a href="/register">Sign Up</a></li>
+				<li><a href="/login"><i class="fa fa-user" aria-hidden="true"></i>Login </a></li>
+				<li><a href="/register"><i class="fa fa-user-plus" aria-hidden="true"></i>Sign Up</a></li>
 			<% } else { %>
 				<li><a href="#">Signed in as <%=currentUser.username%></a></li>
 				<li><a href="/logout">Sign Out</a></li>
