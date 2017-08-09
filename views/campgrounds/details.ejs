@@ -1,11 +1,17 @@
 <% include ../partials/header %>
+<link rel="stylesheet" type="text/css" href="/stylesheets/thumbnail.css">
 <div class="container">
 <div clas="row">
 	<div class="container">
-		<div class="thumbnails">
-			<img class="responsive" src="../uploads/<%=detail.img.data%>">
+		<div class="container-fluid thumbnails">
+			<div class='row'>
+				<div class="col-sm-3"></div>
+				<div class='col-sm-6'>
+					<img class="img-rounded img-responsive" src="../uploads/<%=detail.img.data%>">
+				</div>
+				<div class="col-sm-3"></div>
+			</div>
 			<div class="caption-full">
-				
 				<h4><a href="#"><%=detail.name%></a></h4>
 			</div>
 			<div>

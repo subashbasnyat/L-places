@@ -1,0 +1,23 @@
+/*.thumbnail{        
+    width: 300px; 
+    // or you could use percentage values for responsive layout
+    // width : 100%;
+    height: 500px;
+    overflow: auto;
+}*/
+/*
+.thumbnail img{
+    // your styles for the image
+    height:100%;
+   /* display: block;
+  }*/
+
+
+.img-rounded {
+	margin: 0 auto 0 auto;
+}
+
+/*.responsive {
+	width: 50px;
+	height: 50px;
+}*/
