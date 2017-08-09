@@ -70,7 +70,7 @@ router.post("/",upload.single('file'),isLoggedIn,function(req,res){
 		views:0
 	},function(err,camp){
 		if(!err){
-			res.redirect("/campgrounds");
+			res.redirect("/places");
 		}
 	});
 });
@@ -102,7 +102,7 @@ router.get('/:id/edit',isCampOwner,function(req,res){
 router.put("/:id",isCampOwner,function(req,res){
 	Camp.findByIdAndUpdate(req.params.id,req.body.camp,function(err){
 		if(!err){
-			res.redirect("/campgrounds/"+req.params.id);
+			res.redirect("/places/"+req.params.id);
 		}
 	});
 });
@@ -110,7 +110,7 @@ router.put("/:id",isCampOwner,function(req,res){
 router.delete("/:id",isCampOwner,function(req,res){
 	Camp.findByIdAndRemove(req.params.id,function(err){
 		if(!err){
-			res.redirect("/campgrounds");
+			res.redirect("/places");
 		}
 	});
 });
@@ -133,7 +133,7 @@ function isCampOwner(req,res,next){
 					next();
 				}else{
 					req.flash("error","You are not allowed");
-					res.redirect('/campgrounds/'+camp.id);
+					res.redirect('/places/'+camp.id);
 				}
 			}
 		});

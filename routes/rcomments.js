@@ -24,11 +24,11 @@ router.post("/",isLoggedIn,function(req,res){
 					comment.save();
 					campground.comments.push(comment);
 					campground.save();
-					res.redirect("/campgrounds/"+campground._id);
+					res.redirect("/places/"+campground._id);
 				}
 			});
 		}else{
-			res.redirect("/campgrounds");
+			res.redirect("/places");
 		}
 	});
 });
@@ -44,7 +44,7 @@ router.get("/:cid/edit",isOwner,function(req,res){
 router.put("/:cid",isOwner,function(req,res){
 	Comment.findByIdAndUpdate(req.params.cid,req.body.comment,function(err,comment){
 		if(!err){
-			res.redirect("/campgrounds/"+req.params.id);
+			res.redirect("/places/"+req.params.id);
 		}
 	});
 });
@@ -53,7 +53,7 @@ router.delete("/:cid",isOwner,function(req,res){
 	Comment.findByIdAndRemove(req.params.cid,function(err){
 		if(!err){
 			req.flash("success","Comment Deleted");
-			res.redirect("/campgrounds/"+req.params.id);
+			res.redirect("/places/"+req.params.id);
 		}
 	});
 });
@@ -74,7 +74,7 @@ function isOwner(req,res,next){
 				next();
 			}else{
 				req.flash("error","You are not allowed");
-				res.redirect("/campgrounds/"+req.params.id);
+				res.redirect("/places/"+req.params.id);
 			}
 		});
 	}else{
