@@ -1,0 +1,92 @@
+<% include partials/header %>
+<html>
+  <head>
+    <style>
+      #map {
+        height: 300px;
+        width: 100%;
+       }
+    </style>
+    
+    <link rel="stylesheet" type="text/css" href="/stylesheets/about.css">
+     <link rel="stylesheet" type="text/css" href="/stylesheets/social.css">
+    <link rel="stylesheet" type="text/css" href="/stylesheets/ver.css">
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  </head>
+  <body>
+    <div class="container">
+  
+    <div class="jumbotrons">
+    <h1>Get in Touch</h1>
+    <h3> We're always standing by and eager to help </h3>
+    
+
+    
+  </div>
+    <div id="map"></div>
+    <script>
+      function initMap() {
+        var uluru = {lat:27.620124, lng:85.538525};
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 4,
+          center: uluru
+        });
+        var marker = new google.maps.Marker({
+          position: uluru,
+          map: map
+        });
+      }
+    </script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDWbIr9Z17DsnijEywNXCyfO6_xSVimKlI&callback=initMap">
+    </script>
+    <script
+  src="https://code.jquery.com/jquery-3.2.1.js"
+  integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE="
+  crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<br>
+<br>
+<div class= "container">
+    <div class = "row">
+        <div class="col-lg-6">
+        
+                <h2>Contact Information</h2>
+                <h4> A Feast of Friends <h4>
+                <h4> Kathmandu University </h4>
+                <h4>Dhulikhel, Kavre </h4>
+
+                <br>
+                <hr>
+
+                <h2>Find Us on </h2>
+              <ul class="social-icons">
+                    <li><a href="" class="social-icon"> <i class="fa fa-facebook"></i></a></li>
+                    <li><a href="" class="social-icon"> <i class="fa fa-twitter"></i></a></li>
+                    <li><a href="" class="social-icon"> <i class="fa fa-rss"></i></a></li>
+                    <li><a href="" class="social-icon"> <i class="fa fa-youtube"></i></a></li>
+                    <li><a href="" class="social-icon"> <i class="fa fa-linkedin"></i></a></li>
+                    <li><a href="" class="social-icon"> <i class="fa fa-google-plus"></i></a></li>
+                </ul>
+                
+              
+        </div>
+         <div class="col-lg-6">
+
+          <h2>We'd Love to Hear from You!</h2>
+          <h4> How can we help? Send us an email if you have some query.</h4>
+          
+
+
+
+
+         </div>
+    </div>
+
+</div>
+  </body>
+</html>
+				
+<% include ./partials/footer.ejs %>
+

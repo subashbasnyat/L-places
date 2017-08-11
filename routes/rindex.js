@@ -13,10 +13,15 @@ router.get('/about',function(req,res){
 	res.render("about");
 });
 
+router.get('/contactus',function(req,res){
+	res.render("contactus");
+});
+
+
 //Show Register Form	
 router.get('/register',function(req,res){
 	res.render('register');
-})
+});
 
 //Signup logic
 router.post('/register',function(req,res){

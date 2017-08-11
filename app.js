@@ -9,7 +9,7 @@ var flash = require('connect-flash');
 var fs = require('fs');
 var multer = require('multer');
 mongoose.Promise = global.Promise;
-// mongoose.connect("mongodb://localhost/campdb");
+//mongoose.connect("mongodb://localhost/campdb");
 mongoose.connect("mongodb://subashbasnyat:subashbasnet0123@ds155841.mlab.com:55841/lplaces");
 
 var seedDB = require("./seeds");
@@ -71,6 +71,6 @@ app.listen(process.env.PORT,process.env.IP,function(){
 	console.log("GOOD to GO");
 });
 
-// app.listen(3000,function(){
-// 	console.log("Good to Go");
-// })
+ //app.listen(3000,function(){
+ //	console.log("Good to Go");
+ //})
