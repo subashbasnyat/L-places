@@ -24,7 +24,7 @@ router.post('/register',function(req,res){
 	User.register(newUser,req.body.password,function(err,user){
 		if(!err){
 			passport.authenticate("local")(req,res,function(){
-			req.flash("success","Welcome to YelpCamp "+user.username);
+			req.flash("success","Welcome to Locate Places "+user.username);
 			res.redirect("/places");
 		});
 		}else{
@@ -46,15 +46,14 @@ router.get('/login',function(req,res){
 });
 
 router.get('/loginfailed',function(req,res){
- req.flash("error","SORRY MOFO");
- res.redirect("/login");
+	req.flash("error","Sorry, Wrong Username or Password");
+	res.redirect("/login");
 })
 
 //handles login logic
 router.post('/login',passport.authenticate('local',{
 	successRedirect:'/places',
-	failureRedirect:'/loginfailed',
-	failureRedirect:'/login'
+	failureRedirect:'/loginfailed'
 }),function(req,res){
 });
 

@@ -9,11 +9,15 @@
 		<form action="/register" class="col-md-5 col-md-offset-3" method="POST">
 			<div class="form-group">
 				<label for="user"> Username</label>
-				<input type="name" class="form-control" id="user" name="username" placeholder="username">
+				<input type="name" class="form-control" id="user" name="username" placeholder="username" required>
+			</div>
+			<div class="form-group">
+				<label for="email"> Email</label>
+				<input type="email" class="form-control id="email" name="email" placeholder="example@example.com" pattern=".+.com" required>
 			</div>
 			<div class="form-group">
 				<label for="password"> Password</label>
-				<input type="password" class="form-control id="password" pattern=".{6,15}" required title ='6 to 15 characters' name="password" placeholder="password">
+				<input type="password" class="form-control id="password" pattern=".{6,15}" required title ='6 to 15 characters' name="password" placeholder="password" required>
 			</div>
 			<button>Sign Up</button>
 		</form>
