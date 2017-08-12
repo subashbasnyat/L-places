@@ -10,6 +10,7 @@
     
     <link rel="stylesheet" type="text/css" href="/stylesheets/about.css">
      <link rel="stylesheet" type="text/css" href="/stylesheets/social.css">
+     <link rel="stylesheet" type="text/css" href="/stylesheets/contact.css">
     <link rel="stylesheet" type="text/css" href="/stylesheets/ver.css">
     <link href="https://fonts.googleapis.com/css?family=Lato:400,700" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -76,15 +77,33 @@
 
           <h2>We'd Love to Hear from You!</h2>
           <h4> How can we help? Send us an email if you have some query.</h4>
-          
-
-
-
-
-         </div>
-    </div>
-
+            <form id="contact-form" action="https://api.formbucket.com/f/buk_5Vv4Ls9VF7wxWVXEtq3aQpHx"   method="post">    
+        <div class="form-group center-block">
+          <label for="inputName">Name</label>
+          <input type="text" class="form-control contact-input" id="inputName" placeholder="Name" name="Name" required>
+        </div>
+        <div class="form-group center-block">
+          <label for="inputEmail">Email</label>
+          <input type="email" class="form-control contact-input" id="inputEmail" placeholder="Email" name="Email" required>
+        </div>
+        <div class="form-group center-block">
+          <label for="inputMessage">Message</label>
+          <textarea id="inputMessage" class="form-control contact-input" rows="3" placeholder="Your Message" name="Message" required></textarea>
+        </div>
+        
+        <div class="text-center">
+          <button class="btn btn-default" type="submit" id="email-submit-btn" value="Send">
+            Submit
+          </button>
+        </div>
+        
+      </form>
+            
+                
 </div>
+      
+
+      </script>
   </body>
 </html>
 				
