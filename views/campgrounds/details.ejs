@@ -140,8 +140,8 @@
 								this.mainstars[l].classList.remove("fa-star-o");
 								this.mainstars[l].classList.add("fa-star");
 							}
-							if(remainingrating>=1){
-								this.mainstars[l++].classList.remove("fa-star-o");
+							if(remainingrating>0){
+								this.mainstars[l].classList.remove("fa-star-o");
 								this.mainstars[l].classList.add("fa-star-half");
 								remainingrating=0;
 							}
