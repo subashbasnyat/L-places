@@ -4,12 +4,38 @@
 	<h1 style="text-align: center;"> Add Comment</h1>
 	<div style="width:30%; margin:25px auto;">
 		<form action="/places/<%=campground._id%>/comments" method="POST">
-		<div class="form-group">
-			<input class="form-control" type="text" name="comment[text]" placeholder="Comment">
-		</div>
-		<div class = "form-group">
-			<button class="btn btn-lg btn-primary btn-block">Submit</button>
-		</div>
+			<div>
+		     	<fieldset class="starability-grow">
+		        <input type="radio" id="grow-rate1" name="rating" value="1" onclick="myFunction(this.value)" />
+		        <label for="grow-rate1" title="Terrible">1 star</label>
+
+		        <input type="radio" id="grow-rate2" name="rating" value="2" onclick="myFunction(this.value)"/>
+		        <label for="grow-rate2" title="Not good">2 stars</label>
+
+		        <input type="radio" id="grow-rate3" name="rating" value="3" onclick="myFunction(this.value)"/>
+		        <label for="grow-rate3" title="Average">3 stars</label>
+
+		        <input type="radio" id="grow-rate4" name="rating" value="4" onclick="myFunction(this.value)"/>
+		        <label for="grow-rate4" title="Very good">4 stars</label>
+
+		        <input type="radio" id="grow-rate5" name="rating" value="5" onclick="myFunction(this.value)"/>
+		        <label for="grow-rate5" title="Amazing">5 stars</label>
+				</fieldset>
+    		</div>
+    		<div>
+    			<input type="hidden" id="ratingans" name="comment[rating]">
+    		</div>
+			<script>
+				function myFunction(myValue) {
+					document.getElementById("ratingans").value = myValue;
+				}
+			</script>
+			<div class="form-group">
+				<input class="form-control" type="text" name="comment[text]" placeholder="Comment">
+			</div>
+			<div class = "form-group">
+				<button class="btn btn-lg btn-primary btn-block">Submit</button>
+			</div>
 		</form>
 		<a href="/places/<%=campground._id%>">Go Back</a>
 	</div>

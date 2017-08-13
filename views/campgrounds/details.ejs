@@ -17,6 +17,13 @@
 			<div>
 				<%=detail.details%>
 			</div>
+			<span>
+					<i class="fa fa-star-o" value='1' id='mainstar' aria-hidden="true"></i>
+					<i class="fa fa-star-o" value='2' id='mainstar' aria-hidden="true"></i>
+					<i class="fa fa-star-o" value='3' id='mainstar' aria-hidden="true"></i>
+					<i class="fa fa-star-o" value='4' id='mainstar' aria-hidden="true"></i>
+					<i class="fa fa-star-o" value='5' id='mainstar' aria-hidden="true"></i>
+			</span> <span id="fractionrating"></span>
 			<p><em>Submitted By <%=detail.author.username%></em></p>
 			<% if(currentUser){ %>
 				<%if(detail.author.id.equals(currentUser.id)){%>
@@ -38,12 +45,29 @@
 		
 			</div>
 			
-			
+			<script type="text/javascript">
+				var i = 0;
+				var k = 0;
+			</script>
 			<% detail.comments.forEach(function(comment){%>
 			<div class="row">
 				<div class="col-md-12">
+					<i class="fa fa-star-o" value='1' id='star' aria-hidden="true"></i>
+					<i class="fa fa-star-o" value='2' id='star' aria-hidden="true"></i>
+					<i class="fa fa-star-o" value='3' id='star' aria-hidden="true"></i>
+					<i class="fa fa-star-o" value='4' id='star' aria-hidden="true"></i>
+					<i class="fa fa-star-o" value='5' id='star' aria-hidden="true"></i>
+					<script type="text/javascript">
+						var j = i;
+						this.stars=document.querySelectorAll('#star');
+						for(i; i < j+<%=comment.rating%>; i++){
+							this.stars[i].classList.remove("fa-star-o");
+							this.stars[i].classList.add("fa-star");
+							k++;
+						}
+						i+=(5-<%=comment.rating%>);
+					</script>
 					<strong><%=comment.author.username%></strong>
-					<span class="pull-right"</span>
 					<p>
 						<%=comment.text%>
 					</p>
@@ -54,14 +78,32 @@
 							<form action="/places/<%=detail._id%>/comments/<%=comment._id%>?_method=DELETE" class="inlineform" method="POST">
 								<input type="submit" class="btn btn-danger btn-xs" name="button" value="Delete">
 							</form>
-							<hr>
 						<%}%>
 					<%}%>
 					</div>
+					<hr>
 				</div>
 			</div>
 			<%})%>
-			
+			<!-- <div><input type="hidden" name="totrating" id="totalrating" value=""></div> -->
+			<script type="text/javascript">
+				// document.getElementById('totalrating').value= k/(i/5)
+				var totalrating = (k/(i/5)).toFixed(2);
+				var totalcompleteratings = parseInt(totalrating);
+				var remainingrating = k%(i/5);
+				this.mainstars= document.querySelectorAll('#mainstar');
+				for(var l=0; l< totalcompleteratings; l++){
+					this.mainstars[l].classList.remove("fa-star-o");
+					this.mainstars[l].classList.add("fa-star");
+				}
+				if(remainingrating>=1){
+					this.mainstars[l++].classList.remove("fa-star-o");
+					this.mainstars[l].classList.add("fa-star-half");
+					remainingrating=0;
+				}
+				document.getElementById("fractionrating").innerHTML = totalrating;
+
+			</script>
 		</div>
 	</div>
 </div>

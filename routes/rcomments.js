@@ -6,8 +6,21 @@ var Comment = require('../models/mcomment');
 
 //Comments New
 router.get("/new",isLoggedIn,function(req,res){
-	Camp.findById(req.params.id,function(err,campground){
-		res.render("comments/new",{campground:campground});
+	// Camp.findById(req.params.id,function(err,campground){
+	Camp.findById(req.params.id).populate('comments').exec(function(err,camps){
+		var already=0;
+		camps.comments.forEach(function(comments){
+			if (comments.author.id.equals(req.user._id)){
+				already++;
+				console.log("Already");
+			}
+		});
+		if(already<1){
+			res.render("comments/new",{campground:camps});
+		}else{
+			req.flash("error","You have already commented on this article.")
+			res.redirect("/places/"+camps._id);
+		}
 	});
 });
 
