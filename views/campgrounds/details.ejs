@@ -5,136 +5,156 @@
 	<div class="container">
 		<div class="container-fluid thumbnails">
 			<div class='row'>
-				<div class="col-sm-3"></div>
-				<div class='col-sm-6'>
-					<img class="img-rounded img-responsive" src="../uploads/<%=detail.img.data%>">
-				</div>
-				<div class="col-sm-3"></div>
-			</div>
-			<div class="caption-full">
-				<h4><a href="#"><%=detail.name%></a></h4>
-			</div>
-			<div>
-				<%=detail.details%>
-			</div>
-			<span>
-					<i class="fa fa-star-o" value='1' id='mainstar' aria-hidden="true"></i>
-					<i class="fa fa-star-o" value='2' id='mainstar' aria-hidden="true"></i>
-					<i class="fa fa-star-o" value='3' id='mainstar' aria-hidden="true"></i>
-					<i class="fa fa-star-o" value='4' id='mainstar' aria-hidden="true"></i>
-					<i class="fa fa-star-o" value='5' id='mainstar' aria-hidden="true"></i>
-			</span> <span id="fractionrating"></span>
-			<p><em>Submitted By <%=detail.author.username%></em></p>
-			<% if(currentUser){ %>
-				<%if(detail.author.id.equals(currentUser.id)){%>
-				<div>
-					<a href="/places/<%=detail.id%>/edit" class="btn btn-warning">Edit</a>
-					<form action="/places/<%=detail._id%>?_method=DELETE" class="inlineform" method="POST">
-						<button class="btn btn-danger">Delete</button>
-					</form>
-				</div>
-				<%}%>
-			<%}%>
-		</div>
-		<div class="well">
-			<div class="text-right">
-				<a class="btn btn-success" id=""href="/places/<%=detail._id%>/comments/new">Add New Comment</a>
-				<script type="text/javascript">
-					
-				</script>
-		
-			</div>
-			
-			<script type="text/javascript">
-				var i = 0;
-				var k = 0;
-			</script>
-			<% detail.comments.forEach(function(comment){%>
-			<div class="row">
-				<div class="col-md-12">
-					<i class="fa fa-star-o" value='1' id='star' aria-hidden="true"></i>
-					<i class="fa fa-star-o" value='2' id='star' aria-hidden="true"></i>
-					<i class="fa fa-star-o" value='3' id='star' aria-hidden="true"></i>
-					<i class="fa fa-star-o" value='4' id='star' aria-hidden="true"></i>
-					<i class="fa fa-star-o" value='5' id='star' aria-hidden="true"></i>
-					<script type="text/javascript">
-						var j = i;
-						this.stars=document.querySelectorAll('#star');
-						for(i; i < j+<%=comment.rating%>; i++){
-							this.stars[i].classList.remove("fa-star-o");
-							this.stars[i].classList.add("fa-star");
-							k++;
+				<div class="col-sm-3">	
+					<h3> <%=detail.name%></h3>				
+					<style>
+				       #map {
+				        height: 400px;
+				        width: 100%;
+				       }
+				    </style>
+					<div id="map"></div>
+				    <script>
+						function initMap() {
+							var myLatlng = {
+						    	lat: <%= detail.latitude %>,
+						    	lng: <%= detail.longitude %>
+						  	};
+
+						  	var map = new google.maps.Map(document.getElementById('map'), {
+						    	zoom: 12,
+						    	center: myLatlng
+						  	});
+
+						  	var marker = new google.maps.Marker({
+						    	position: myLatlng,
+						    	map: map,
+						    	title: 'Click to zoom'
+						  	});
 						}
-						i+=(5-<%=comment.rating%>);
-					</script>
-					<strong><%=comment.author.username%></strong>
-					<p>
-						<%=comment.text%>
-					</p>
+				    </script>
+				    <script async defer
+				    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCrDFDqmbefeEWWQdD0l2kSPG8XD9yPOSk&callback=initMap">
+				    </script>
+
+				    <div>
+				    	<hr>
+				    	<h4>You may also like:</h4>
+				    	<div class="well">
+				    		<% allcamps.some(function(allthecamps,index){ %>
+				    			<% if((allthecamps.name)===(detail.name)){return false}%>
+				    			<span><a href="/places/<%=allthecamps.id%>"><%=allthecamps.name%></a></span>
+				    			<div><%=allthecamps.details.substring(0,100)%>...</div>
+				    			<hr class="hrminor">
+				    			<% if(index==5){return true;} %>
+				    		<% }) %>
+				    	</div>
+				    </div>
+				</div>
+				<div class='col-sm-9'>
+					<img class="img-rounded img-responsive" src="../uploads/<%=detail.img.data%>">
+
+					<div class="caption-full">
+						<h4><a href="#"><%=detail.name%></a></h4>
+					</div>
 					<div>
+						<%=detail.details%>
+					</div>
+					<span>
+						<i class="fa fa-star-o" value='1' id='mainstar' aria-hidden="true"></i>
+						<i class="fa fa-star-o" value='2' id='mainstar' aria-hidden="true"></i>
+						<i class="fa fa-star-o" value='3' id='mainstar' aria-hidden="true"></i>
+						<i class="fa fa-star-o" value='4' id='mainstar' aria-hidden="true"></i>
+						<i class="fa fa-star-o" value='5' id='mainstar' aria-hidden="true"></i>
+					</span> <span id="fractionrating"></span>
+					<p><em>Submitted By <%=detail.author.username%></em></p>
 					<% if(currentUser){ %>
-						<% if(comment.author.id.equals(currentUser.id)){%>
-							<a href="/places/<%=detail._id%>/comments/<%=comment._id%>/edit" class="btn btn-info btn-xs">Edit</a>
-							<form action="/places/<%=detail._id%>/comments/<%=comment._id%>?_method=DELETE" class="inlineform" method="POST">
-								<input type="submit" class="btn btn-danger btn-xs" name="button" value="Delete">
+						<%if(detail.author.id.equals(currentUser.id)){%>
+						<div>
+							<a href="/places/<%=detail.id%>/edit" class="btn btn-warning">Edit</a>
+							<form action="/places/<%=detail._id%>?_method=DELETE" class="inlineform" method="POST">
+								<button class="btn btn-danger">Delete</button>
 							</form>
+						</div>
 						<%}%>
 					<%}%>
-					</div>
-					<hr>
-				</div>
-			</div>
-			<%})%>
-			<!-- <div><input type="hidden" name="totrating" id="totalrating" value=""></div> -->
-			<script type="text/javascript">
-				// document.getElementById('totalrating').value= k/(i/5)
-				var totalrating = (k/(i/5)).toFixed(2);
-				var totalcompleteratings = parseInt(totalrating);
-				var remainingrating = k%(i/5);
-				this.mainstars= document.querySelectorAll('#mainstar');
-				for(var l=0; l< totalcompleteratings; l++){
-					this.mainstars[l].classList.remove("fa-star-o");
-					this.mainstars[l].classList.add("fa-star");
-				}
-				if(remainingrating>=1){
-					this.mainstars[l++].classList.remove("fa-star-o");
-					this.mainstars[l].classList.add("fa-star-half");
-					remainingrating=0;
-				}
-				document.getElementById("fractionrating").innerHTML = totalrating;
 
-			</script>
+					<br>
+					<div class="well">
+						<div class="text-right">
+							<a class="btn btn-success" id=""href="/places/<%=detail._id%>/comments/new">Add New Comment</a>
+							<script type="text/javascript">
+								
+							</script>
+					
+						</div>
+						
+						<script type="text/javascript">
+							var i = 0;
+							var k = 0;
+						</script>
+						<% detail.comments.forEach(function(comment){%>
+						<div class="row">
+							<div class="col-md-12">
+								<i class="fa fa-star-o" value='1' id='star' aria-hidden="true"></i>
+								<i class="fa fa-star-o" value='2' id='star' aria-hidden="true"></i>
+								<i class="fa fa-star-o" value='3' id='star' aria-hidden="true"></i>
+								<i class="fa fa-star-o" value='4' id='star' aria-hidden="true"></i>
+								<i class="fa fa-star-o" value='5' id='star' aria-hidden="true"></i>
+								<script type="text/javascript">
+									var j = i;
+									this.stars=document.querySelectorAll('#star');
+									for(i; i < j+<%=comment.rating%>; i++){
+										this.stars[i].classList.remove("fa-star-o");
+										this.stars[i].classList.add("fa-star");
+										k++;
+									}
+									i+=(5-<%=comment.rating%>);
+								</script>
+								<strong><%=comment.author.username%></strong>
+								<p>
+									<%=comment.text%>
+								</p>
+								<div>
+								<% if(currentUser){ %>
+									<% if(comment.author.id.equals(currentUser.id)){%>
+										<a href="/places/<%=detail._id%>/comments/<%=comment._id%>/edit" class="btn btn-info btn-xs">Edit</a>
+										<form action="/places/<%=detail._id%>/comments/<%=comment._id%>?_method=DELETE" class="inlineform" method="POST">
+											<input type="submit" class="btn btn-danger btn-xs" name="button" value="Delete">
+										</form>
+									<%}%>
+								<%}%>
+								</div>
+								<hr class="hrmain">
+							</div>
+						</div>
+						<%})%>
+						<!-- <div><input type="hidden" name="totrating" id="totalrating" value=""></div> -->
+						<script type="text/javascript">
+							// document.getElementById('totalrating').value= k/(i/5)
+							var totalrating = (k/(i/5)).toFixed(2);
+							var totalcompleteratings = parseInt(totalrating);
+							var remainingrating = k%(i/5);
+							this.mainstars= document.querySelectorAll('#mainstar');
+							for(var l=0; l< totalcompleteratings; l++){
+								this.mainstars[l].classList.remove("fa-star-o");
+								this.mainstars[l].classList.add("fa-star");
+							}
+							if(remainingrating>=1){
+								this.mainstars[l++].classList.remove("fa-star-o");
+								this.mainstars[l].classList.add("fa-star-half");
+								remainingrating=0;
+							}
+							document.getElementById("fractionrating").innerHTML = totalrating;
+
+						</script>
+					</div>
+
+				</div>
+				<!-- <div class="col-sm-3"></div> -->
+			</div>
 		</div>
 	</div>
 </div>
-	<style>
-       #map {
-        height: 400px;
-        width: 100%;
-       }
-    </style>
-	<div id="map"></div>
-    <script>
-		function initMap() {
-			var myLatlng = {
-		    	lat: <%= detail.latitude %>,
-		    	lng: <%= detail.longitude %>
-		  	};
-
-		  	var map = new google.maps.Map(document.getElementById('map'), {
-		    	zoom: 12,
-		    	center: myLatlng
-		  	});
-
-		  	var marker = new google.maps.Marker({
-		    	position: myLatlng,
-		    	map: map,
-		    	title: 'Click to zoom'
-		  	});
-		}
-    </script>
-    <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCrDFDqmbefeEWWQdD0l2kSPG8XD9yPOSk&callback=initMap">
-    </script>
 </div>
 <% include ../partials/footer %>

@@ -77,17 +77,19 @@ router.post("/",upload.single('file'),isLoggedIn,function(req,res){
 
 //show details
 router.get("/:id",function(req,res){
-	Camp.findById(req.params.id).populate('comments').exec(function(err,camps){
-		camps.views = camps.views+1;
-		camps.save(function(err,dcamp){
+	Camp.find(function(err,allcamps){
+		Camp.findById(req.params.id).populate('comments').exec(function(err,camps){
+			camps.views = camps.views+1;
+			camps.save(function(err,dcamp){
+				if(!err){
+					res.render("campgrounds/details",{detail:dcamp,allcamps:allcamps});
+				}
+			})
 			if(!err){
-				res.render("campgrounds/details",{detail:dcamp});
+				console.log("GOOD EVERYTHING IS GOOD");
 			}
-		})
-		if(!err){
-			console.log("GOOD EVERYTHING IS GOOD");
-		}
-	});
+		});
+	})
 });
 
 router.get('/:id/edit',isCampOwner,function(req,res){
