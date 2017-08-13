@@ -1,13 +1,72 @@
 <% include ./partials/header %>
 <head>
-	<title>Your Places</title>
+	
+	 <link rel="stylesheet" type="text/css" href="/stylesheets/profile.css">
+	<script async defer
+    src="/js/profile.js">
+    </script>
+
 </head>
 <body>
-<h1>Your Places:</h1>
-<br>
-<% users.forEach(function(camps){ %>
-	<a href="/places/<%=camps.id%>"><h4> <%= camps.name %> </h4></a>
 
-<% }); %>
+<div class="container">
+		<div class="col-lg-12">
+		    <div class="card hovercard">
+		        <div class="card-background">
+		            <img class="card-bkimg" alt="" src="raw/aboutus.png">
+		         
+		        </div>
+		        <div class="useravatar">
+		            <img alt="" src="raw/subash.png">
+		        </div>
+		        <div class="card-info"> <span class="card-title">Username</span>
+
+		        </div>
+		    </div>
+		    <div class="btn-pref btn-group btn-group-justified btn-group-lg" role="group" aria-label="...">
+		        <div class="btn-group" role="group">
+		            <button type="button" id="stars" class="btn btn-primary" href="#tab1" data-toggle="tab"><span class="fa fa-user" aria-hidden="true"></span>
+		                <div class="hidden-xs">Profile</div>
+		            </button>
+		        </div>
+		        <div class="btn-group" role="group">
+		            <button type="button" id="favorites" class="btn btn-default" href="#tab2" data-toggle="tab"><span class="fa fa-upload" aria-hidden="true"></span>
+		                <div class="hidden-xs">My Uploads</div>
+		            </button>
+		        </div>
+		        <div class="btn-group" role="group">
+		            <button type="button" id="following" class="btn btn-default" href="#tab3" data-toggle="tab"><span class="fa fa-star-half-o" aria-hidden="true"></span>
+		                <div class="hidden-xs">My Reviews</div>
+		            </button>
+		        </div>
+		    </div>
+
+		        <div class="well">
+		      <div class="tab-content">
+		        <div class="tab-pane fade in active" id="tab1">
+		          Name:
+		          <hr>
+		          Email:
+		        </div>
+		        <div class="tab-pane fade in" id="tab2">
+		          <h3><h3>My Uploads
+		          	<hr>
+		          	<% users.forEach(function(camps){ %>
+					<a href="/places/<%=camps.id%>"><h4> <%= camps.name %> </h4></a>
+					<% }); %>
+					
+		          </h3></h3>
+		        </div>
+		        <div class="tab-pane fade in" id="tab3">
+		          <h3>This is tab 3</h3>
+		        </div>
+		      </div>
+		    </div>
+		    
+		    </div>
+</div>     
+    
+
+
 </body>
 <% include ./partials/footer %>
