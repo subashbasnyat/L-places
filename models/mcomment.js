@@ -9,6 +9,13 @@ var commentSchema = new mongoose.Schema({
 		}, 
 		username:String
 	},
+	campground:{
+		id:{
+			type:mongoose.Schema.Types.ObjectId,
+			ref:"Campground"
+		},
+		campname:String
+	},
 	rating: Number
 });
 module.exports = mongoose.model("comment",commentSchema);

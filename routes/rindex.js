@@ -2,7 +2,8 @@ var express = require('express');
 var router = express.Router({mergeParams:true});
 var passport = require('passport');
 var User = require('../models/muser');
-var Camp = require('../models/mcampground')
+var Camp = require('../models/mcampground');
+var Comment = require('../models/mcomment');
 
 //Root
 router.get('/',function(req,res){
@@ -25,7 +26,7 @@ router.get('/register',function(req,res){
 
 //Signup logic
 router.post('/register',function(req,res){
-	var newUser = new User({username:req.body.username});
+	var newUser = new User({username:req.body.username,firstname:req.body.firstname,lastname:req.body.lastname,email:req.body.email});
 	User.register(newUser,req.body.password,function(err,user){
 		if(!err){
 			passport.authenticate("local")(req,res,function(){
@@ -40,8 +41,12 @@ router.post('/register',function(req,res){
 });
 
 router.get('/user', function(req,res){
-	Camp.find({'author.username':req.user.username}).exec(function(err,users){
-		res.render('profile',{users:users});
+	User.find({'username':req.user.username}).exec(function(err,users){
+		Camp.find({'author.username':req.user.username}).exec(function(err,campusers){
+			Comment.find({'author.username':req.user.username}).exec(function(err,comusers){
+				res.render('profile',{users:users,campusers:campusers,comusers:comusers});
+			});
+		});
 	});
 });
 

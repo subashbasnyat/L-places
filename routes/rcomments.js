@@ -34,6 +34,8 @@ router.post("/",isLoggedIn,function(req,res){
 				if(!err){
 					comment.author.id = req.user._id;
 					comment.author.username = req.user.username;
+					comment.campground.id=campground.id;
+					comment.campground.campname= campground.name;
 					comment.save();
 					campground.comments.push(comment);
 					campground.save();

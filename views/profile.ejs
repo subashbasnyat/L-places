@@ -44,21 +44,43 @@
 		        <div class="well">
 		      <div class="tab-content">
 		        <div class="tab-pane fade in active" id="tab1">
-		          Name: <%=users.name%>
-		          <hr>
-		          Email: <%=users.email%>
+		        <%users.forEach(function(users){%>
+		        	Name: <%=users.firstname+" "+users.lastname%>
+		          	<hr>
+		          	Email: <%=users.email%>
+		        <%});%>
 		        </div>
 		        <div class="tab-pane fade in" id="tab2">
 		          <h3><h3>My Uploads
 		          	<hr>
-		          	<% users.forEach(function(camps){ %>
-					<a href="/places/<%=camps.id%>"><h4> <%= camps.name %> </h4></a>
+		          	<% campusers.forEach(function(campusers){ %>
+					<a href="/places/<%=campusers.id%>"><h4> <%= campusers.name %> </h4></a>
 					<% }); %>
 					
 		          </h3></h3>
 		        </div>
 		        <div class="tab-pane fade in" id="tab3">
-		          <h3>This is tab 3</h3>
+		        <script type="text/javascript">var i=0</script>
+		          <%comusers.forEach(function(comusers){%>
+		          	<a href="/places/<%=comusers.campground.id%>"><%=comusers.campground.campname%></a>
+		          	<span>
+						<i class="fa fa-star-o" value='1' id='star' aria-hidden="true"></i>
+						<i class="fa fa-star-o" value='2' id='star' aria-hidden="true"></i>
+						<i class="fa fa-star-o" value='3' id='star' aria-hidden="true"></i>
+						<i class="fa fa-star-o" value='4' id='star' aria-hidden="true"></i>
+						<i class="fa fa-star-o" value='5' id='star' aria-hidden="true"></i>
+					</span>
+					<script type="text/javascript">
+						var j = i;
+						this.stars=document.querySelectorAll('#star');
+						for(i; i < j+<%=comusers.rating%>; i++){
+							this.stars[i].classList.remove("fa-star-o");
+							this.stars[i].classList.add("fa-star");
+						}
+						i+=(5-<%=comusers.rating%>);
+					</script>
+		          	<p>Comment: <%=comusers.text%></p>
+		          <%})%>
 		        </div>
 		      </div>
 		    </div>
