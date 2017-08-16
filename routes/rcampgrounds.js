@@ -14,7 +14,7 @@ var storage = multer.diskStorage({
   }
 })
  
-var upload = multer({ storage: storage })
+var upload = multer({ storage: storage });
 //Index
 // router.get("/",function(req,res){
 // 	Camp.find({},function(err,camps){
@@ -74,6 +74,7 @@ router.post("/",upload.single('file'),isLoggedIn,function(req,res){
 		}
 	});
 });
+
 
 //show details
 router.get("/:id",function(req,res){

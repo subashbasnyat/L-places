@@ -1,27 +1,34 @@
 <% include ./partials/header %>
-<head>
-	
-	 <link rel="stylesheet" type="text/css" href="/stylesheets/profile.css">
+<body>
+
+<link rel="stylesheet" type="text/css" href="/stylesheets/profile.css">
 	<script async defer
     src="/js/profile.js">
     </script>
-
-</head>
-<body>
 
 <div class="container">
 		<div class="col-lg-12">
 		    <div class="card hovercard">
 		        <div class="card-background">
 		            <img class="card-bkimg" alt="" src="raw/aboutus.png">
-		         
 		        </div>
-		        <div class="useravatar">
-		            <img alt="" src="raw/subash.png">
-		        </div>
-		        <div class="card-info"> <span class="card-title">Username</span>
+		        <%users.forEach(function(users){%>
+				<div class="useravatar">
+		           	<img src="../user/<%=users.userimg.data%>">
+	    		</div>
 
+	    		<form action="/users/newprofile" method="POST" enctype="multipart/form-data">
+		    		<div class="file-upload">
+					    <label for="upload" class="file-upload__label">Upload Profile Picture</label>
+					    <input id="upload" class="file-upload__input" type="file" name="file-upload" onchange="this.form.submit()">
+					</div>
+				</form>
+				<br><br>
+		        <div class="card-info"> <span class="card-title">
+		        <%=users.firstname+" "+users.lastname+" ("+users.username+")"%>
+		        <%});%></span>
 		        </div>
+
 		    </div>
 		    <div class="btn-pref btn-group btn-group-justified btn-group-lg" role="group" aria-label="...">
 		        <div class="btn-group" role="group">
