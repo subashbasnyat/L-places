@@ -33,3 +33,14 @@
   border-top: 1px solid #8c8c8c;
   border-bottom: 1px solid #fff;
 }
+
+.annapurna{
+  background-image:url(../raw/annapurna.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+  border-radius:20px;
+  margin: 20px 0px 40px 0px;
+  padding: 40px 0 40px 0px;
+  border-style:round;
+  color:#FFEFEF;
+}
