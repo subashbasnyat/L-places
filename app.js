@@ -10,8 +10,14 @@ var fs = require('fs');
 var multer = require('multer');
 mongoose.Promise = global.Promise;
 // mongoose.connect("mongodb://localhost/campdb");
-mongoose.connect("mongodb://subashbasnyat:subashbasnet0123@ds155841.mlab.com:55841/lplaces");
-
+const uri = 'mongodb+srv://mrmojorisin:'+process.env.PASSWORD+'@cluster0.jvpcd.mongodb.net/' +
+  'lplaces?retryWrites=true&w=majority';
+// Prints "MongoError: bad auth Authentication failed."
+mongoose.connect(uri, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  serverSelectionTimeoutMS: 5000
+}).catch(err => console.log(err.reason));
 var seedDB = require("./seeds");
 
 //seedDB();
